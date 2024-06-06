@@ -10,8 +10,8 @@ router.post('/subscription', async (req,res)=>{
   res.status(200).json()
 
   const payload = JSON.stringify({
-    title:'My custom notification',
-    message:'Hello World'
+    title:'Gracias por permitir las notificaciones!🥳',
+    message:'disfruta de Fútbol PWA ⚽'
   })
   
   try {
