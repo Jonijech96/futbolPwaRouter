@@ -31,8 +31,10 @@ self.addEventListener('notificationclick', function(event) {
 const PWA_APP_CACHE = "Pwacache"
 const APP_SHELL = [
   "/",
-  "index.html",
-  "main.js",
+  "./index.html",
+  "./main.js",
+  "./js/bootstrap.bundle.min.js",
+  "./css/bootstrap.min.css"
 ]
 self.addEventListener("install", e=>{
   const cacheStatic = caches.open(PWA_APP_CACHE).then(cache => cache.addAll(APP_SHELL))
@@ -41,11 +43,18 @@ self.addEventListener("install", e=>{
 })
 
 //FUNCIONALIDAD PARA BUSCAR EN CACHE Y SI NO LAS CARGA EN LA RED
-self.addEventListener("fetch",(e)=>{
+self.addEventListener("fetch", (e) => {
   e.respondWith(
-    caches.match(e.request).then( res => res || fetch(e.request)).catch(error=>console.log(error))
+    caches.match(e.request).then((res) => {
+      if (res) {
+        console.log("Cargado desde la caché:", e.request.url);
+        return res;
+        } else {
+        return fetch(e.request);
+      }
+    }).catch((error) => console.log(error))
   )
-})
+});
 
 //FUNCIONALIDAD PARA CACHE POST
 const POST_CACHE = 'post-cache';

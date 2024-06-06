@@ -50,7 +50,6 @@ async function sendSubscriptionToServer(subscription) {
         'Content-Type': 'application/json'
       }
     });
-
     console.log('Suscripción enviada al servidor');
   } catch (error) {
     console.error('Error al enviar la suscripción al servidor:', error);
