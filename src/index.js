@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
+const port = process.env.PORT || 4000;
 
 const app = express()
 
@@ -18,6 +19,6 @@ app.use(require('./routes/index'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.listen(3000)
+app.listen(port)
 
-console.log('Server Listening...');
+console.log(`Server Listening in port...${port}`);
